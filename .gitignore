@@ -135,7 +135,7 @@ venv/
 ENV/
 env.bak/
 venv.bak/
-autogen-multi-agent-example/bin
+autogen-multi-agent-example/
 
 # Spyder project settings
 .spyderproject
@@ -173,3 +173,5 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
+
+.DS_Store
