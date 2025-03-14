@@ -135,6 +135,7 @@ venv/
 ENV/
 env.bak/
 venv.bak/
+autogen-multi-agent-example/bin
 
 # Spyder project settings
 .spyderproject
