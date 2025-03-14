@@ -12,28 +12,37 @@ agent = ConversableAgent(
     human_input_mode="NEVER",
 )
 
-agent_one = ConversableAgent(
+hulk = ConversableAgent(
     name="hulk",
-    system_message="Your name is Hulk and you are a superhero stand-up comedian",
+    system_message="Your name is Hulk and you are a superhero stand-up comedian. "
+    "When you're ready to end the conversation, say 'I gotta go'.",
     llm_config=llm_config,
     human_input_mode="NEVER",
+    is_termination_msg=lambda msg: "I gotta go" in msg["content"]
 )
 
-agent_two = ConversableAgent(
+thor = ConversableAgent(
     name="thor",
     system_message="Your name is Thor and your are a superhero stand-up comedian. "
-    "Start the next joke from the punchline of the previous joke",
+    "Start the next joke from the punchline of the previous joke. "
+    "When you're ready to end the conversation, say 'I gotta go'.",
     llm_config= llm_config,
     human_input_mode="NEVER",
+    is_termination_msg=lambda msg: "I gotta go" in msg["content"]
 )
 
-chat_result = agent_two.initiate_chat(
-    recipient=agent_one,
+chat_result = thor.initiate_chat(
+    recipient=hulk,
     message="I'm Thor, Hulk, let's keep the jokes rolling."
     "Start the next joke from the punchline of the previous joke",
-    max_turns=3
+    summary_method="reflection_with_llm",
+    summary_args={
+        "summary_prompt": "Summarise the conversation"
+    }
 )
 
 pprint.pprint(chat_result.chat_history)
 pprint.pprint(chat_result.cost)
 pprint.pprint(chat_result.summary)
+
+thor.send(message="What's the last joke we talked about?", recipient= hulk)
