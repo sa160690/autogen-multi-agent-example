@@ -1,0 +1,7 @@
+# requirements file
+pyautogen==0.2.25
+chess==1.10.0
+matplotlib
+numpy
+pandas
+yfinance
