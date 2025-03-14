@@ -5,3 +5,6 @@ matplotlib
 numpy
 pandas
 yfinance
+autogen
+dotenv
+pprintpp
